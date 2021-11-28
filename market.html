@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}
+    Market Page
+{% endblock %}
+{% block content %}
+<div class="row" style="margin-top:20px; margin-left:20px; font-family:Courier New; color:white">
+   <div class="col-8">
+       <h2>Available items on the Market</h2>
+       <p>Click on one of the items to start buying</p>
+       <br>
+      <table class="table table-hover" style="background-color:brown">
+         <thead>
+            <tr>
+               <!-- Your Columns HERE -->
+               <th scope="col" style="color:white">ID</th>
+               <th scope="col" style="color:white">Name</th>
+               <th scope="col" style="color:white">Barcode</th>
+               <th scope="col" style="color:white">Price</th>
+               <th scope="col" style="color:white">Options</th>
+            </tr>
+         </thead>
+         <tbody>
+            <!-- Your rows inside the table HERE: -->
+            {% for item in items %}
+            {% include 'includes/items_modals.html' %}
+            <tr>
+               <td style="color:white">{{ item.id }}</td>
+               <td style="color:white">{{ item.name }}</td>
+               <td style="color:white">{{ item.barcode }}</td>
+               <td style="color:white">${{ item.price }}</td>
+               <td>
+                  <button class="btn btn-outline btn-dark" data-toggle="modal" data-target="#Modal-MoreInfo-{{ item.id }}">Item Info</button>
+                  <button class="btn btn-outline btn-success" data-toggle="modal" data-target="#Modal-PurchaseConfirm-{{ item.id }}">Purchase</button>
+               </td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+   <div class="col-4">
+        <h2>Owned Items</h2>
+        <p>Click on sell item to put an item back on the Market</p>
+        <br>
+   </div>
+</div>
+{% endblock %}
